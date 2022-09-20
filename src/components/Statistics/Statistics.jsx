@@ -1,14 +1,14 @@
 import css from './Statistics.module.css';
 import PropTypes from 'prop-types';
 
-const Statistics = ({ good, bad, neutral }) => {
+const Statistics = ({ good, bad, neutral, total, positiveFeedback }) => {
     return (
         <div className={css.statistics}>
             <p className={css.item}>Good: {good}</p>
             <p className={css.item}>Neutral: {neutral}</p>
             <p className={css.item}>Bad: {bad}</p>
-            <p className={css.item}>Total: {good + bad + neutral}</p>
-            <p className={css.item}>Positive feedback: {Math.round((good/(good + neutral + bad)) * 100)}%</p>
+            <p className={css.item}>Total: {total}</p>
+            <p className={css.item}>Positive feedback: {positiveFeedback}%</p>
         </div>
     )
 }

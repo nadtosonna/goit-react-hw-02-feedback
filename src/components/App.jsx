@@ -19,7 +19,22 @@ export class App extends Component {
     });
   };
 
-    render() {
+  countTotal() {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  }
+
+  countPositive() {
+    const total = this.countTotal();
+    if (!total) {
+      return 0;
+    }
+    const { good } = this.state;
+    const result = Math.round((good / (total)) * 100);
+    return result;
+  }
+
+  render() {
       return (
         <div>
           <Section title="Please leave your feedback:">
@@ -28,13 +43,14 @@ export class App extends Component {
             onLeaveFeedback={this.onLeaveFeedback} />
           </Section>
           <Section title="Statistics:">
-            {this.state.good || this.state.bad || this.state.neutral > 0 ?
+            {this.countTotal() ?
               <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad} /> :
+                good={this.state.good}
+                neutral={this.state.neutral}
+                bad={this.state.bad}
+                total={this.countTotal()}
+                positiveFeedback={this.countPositive()} /> :
               <Notification message="There is no feedback yet." />}
-
             </Section>
         </div>
 
